@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div>
-				<h1>{data?.user?.name}</h1>
+				<h1 className="text-3xl font-bold">{data?.user?.name}</h1>
 				<p>{data?.user?.email}</p>
 			</div>
 		</div>
