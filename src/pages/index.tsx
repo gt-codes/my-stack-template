@@ -7,8 +7,10 @@ import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
 	const { query } = useRouter();
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 	const { data } = trpc.useQuery(['user.getUserById', { id: (query.id as string) || '1' }]);
+
+	if (status === 'loading') return <div>Loading...</div>;
 
 	if (!session) {
 		return (
