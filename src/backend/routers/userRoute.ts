@@ -9,7 +9,13 @@ export const userRoute = createRouter()
 	})
 	.query('getUserById', {
 		input: z.object({ id: z.string() }),
-		async resolve({ input }) {
+		async resolve({ ctx, input }) {
+			// Uncomment this snippet if connecting to a real database
+			//
+			// const user = await ctx.prisma.user.findUnique({
+			// 	where: { id: input.id },
+			// });
+
 			const res = await fetch(`https://jsonplaceholder.typicode.com/users/${input.id}`);
 			const user = await res.json();
 			return { success: true, user };
