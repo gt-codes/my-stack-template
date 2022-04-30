@@ -10,21 +10,14 @@ const Home: NextPage = () => {
 	const { data: session } = useSession();
 	const { data } = trpc.useQuery(['user.getUserById', { id: (query.id as string) || '1' }]);
 
-	if (session) {
+	if (!session) {
 		return (
 			<>
-				Signed in as {session?.user?.email} <br />
-				<button onClick={() => signOut()}>Sign out</button>
+				Not signed in <br />
+				<button onClick={() => signIn()}>Sign in</button>
 			</>
 		);
 	}
-	return (
-		<>
-			Not signed in <br />
-			<button onClick={() => signIn()}>Sign in</button>
-		</>
-	);
-
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -35,6 +28,7 @@ const Home: NextPage = () => {
 			<div>
 				<h1 className="text-3xl font-bold">{data?.user?.name}</h1>
 				<p>{data?.user?.email}</p>
+				<button onClick={() => signOut()}>Signout</button>
 			</div>
 		</div>
 	);
